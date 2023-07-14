@@ -1,0 +1,115 @@
+body {
+    margin:0;
+    background-color: #ffffff;
+    line-height: 1.5;
+    font-family: "PT Sans", Calibri, Tahoma, sans-serif;
+    color: #272643;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+  }
+
+h1 {
+    margin: 1rem 0;
+    line-height: 1.25;
+    font-size: 3rem;
+    font-weight: 100;
+}
+a {
+    color: #272643;
+}
+
+a:link {
+    text-decoration: none;
+  }
+  
+  a:visited {
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  a:active {
+    text-decoration: underline;
+  }
+
+.header {
+    display: flex;
+    justify-content: center;
+  }
+
+.content-width {
+    max-width: 70ch;
+    width: calc(100% - 4rem);
+    margin: 0 auto;
+}
+.calc {
+    display: flex;
+    justify-content: center;
+}
+.calc-body {
+    background-color: #2f2e52;
+    width:400px;
+    border: 2px solid #272643;
+    border-radius: 20px;
+}
+
+.calc-screen {
+    background-color: #e3f6f5;
+    margin: 20px auto;
+    width: 360px;
+    height: 170px;
+    border-radius: 15px;
+}
+
+.secondary-screen {
+    height: 30px;
+    text-align: right;
+    padding: 10px;
+    font-size: 2rem;
+    font-family: 'Calculator', "PT Sans", Calibri, Tahoma, sans-serif;
+    font-weight: 100;
+}
+
+.main-screen {
+    height: 100px;
+    text-align:right;
+    padding: 10px;
+    font-size: 5rem;;
+    font-family: 'Calculator', "PT Sans", Calibri, Tahoma, sans-serif;
+    font-weight: 600;
+}
+
+.calc-keypad {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: #2c698d;
+    margin: 20px auto;
+    width:360px;
+    height: 370px;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.button {
+    border-radius: 5px;
+    width: 85px;
+    font-size: 2rem;
+    font-weight: 450;
+}
+
+.fun {
+    background-color: #79d2d2;
+}
+
+.num {
+    background-color: #bae8e8;
+}
