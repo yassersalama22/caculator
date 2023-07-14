@@ -4,6 +4,15 @@ body {
     line-height: 1.5;
     font-family: "PT Sans", Calibri, Tahoma, sans-serif;
     color: #202124;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 100vh;
+}
+
+footer {
+    margin-top: auto;
 }
 
 h1 {
@@ -40,7 +49,7 @@ a:link {
 
 .content-width {
     max-width: 70ch;
-    width: calc(100% - 4rem);
+    /* width: calc(100% - 4rem); */
     margin: 0 auto;
 }
 .calc {
