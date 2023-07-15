@@ -1,7 +1,6 @@
 const mainScreen = document.getElementById("main-screen");
 const secondaryScreen = document.getElementById("secondary-screen");
 
-let decimalDotUsed = false;
 let currentOperation = "";
 let operand1 = null;
 let operand2 = null;
@@ -42,7 +41,18 @@ function buttonClickHandler() {
 }
 
 function writeToMainScreen(text){
-    if(text === "." && decimalDotUsed){
+
+    if(mainScreen.innerText.length >= 9){
+        console.info("You have reached maximum numbers allowed for an operand!");
+        return;
+    }
+
+    if(text === "." && mainScreen.innerText.indexOf(".") !== -1){
+        console.info("Illegal number, multiple decimal points are not allowed!")
+        return;
+    }
+    else if (text === "." && mainScreen.innerText === "0") {
+        mainScreen.innerText = "0.";
         return;
     }
 
@@ -70,9 +80,6 @@ function clearMainScreen(){
 
 function eraser(){
     const text  = mainScreen.innerText;
-    if(text.slice(-1) === "."){
-        decimalDotUsed = false;
-    }
     mainScreen.innerText = text.slice(0,-1);
 }
 
