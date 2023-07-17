@@ -1,7 +1,7 @@
 const mainScreen = document.getElementById("main-screen");
-const secondaryScreen = document.getElementById("secondary-screen");
 
-let currentOperation = "";
+let mathOperationClicked = false;
+let currentOperation = null;
 let operand1 = null;
 let operand2 = null;
 
@@ -11,22 +11,29 @@ buttons.forEach((b) => b.addEventListener("click", buttonClickHandler));
 function buttonClickHandler() {
     switch (this.innerText) {
         case "/":
+            mathOperationClick("division");
             break;
         case "X":
+            mathOperationClick("multiply");
             break;
         case "+":
+            mathOperationClick("add");
             break;
         case "-":
+            mathOperationClick("subtract");
             break;
         case "=":
+            equalClick();
             break;
         case "AC":
             clearMainScreen();
+            resetCalc();
             break;
         case "DEL":
             eraser();
             break;
         case "+/-":
+            togglePlusMinus()
             break;
         case "%":
             break;
@@ -41,6 +48,10 @@ function buttonClickHandler() {
 }
 
 function writeToMainScreen(text){
+    if(mathOperationClicked){
+        mainScreen.innerText = 0;
+        mathOperationClicked = false;
+    }
 
     if(mainScreen.innerText.length >= 9){
         console.info("You have reached maximum numbers allowed for an operand!");
@@ -63,40 +74,100 @@ function writeToMainScreen(text){
     else {
         mainScreen.innerText = text;
     }
+    logger("writeToMainScreen");
 }
 
-function writeToSecondaryScreen(text) {
-    
-}
-
-function clearSecondaryScreen() {
-    secondaryScreen.innerText = "";
+function togglePlusMinus() {
+    let screenText = mainScreen.innerText;
+    if(screenText != "0" && screenText.length > 0) {
+        mainScreen.innerText = Number(screenText) * -1;
+    }
+    logger("togglePlusMinus");
 }
 
 function clearMainScreen(){
-    decimalDotUsed = false;
     mainScreen.innerText = "0";
+    logger("clearMainScreen");
 }
 
 function eraser(){
     const text  = mainScreen.innerText;
     mainScreen.innerText = text.slice(0,-1);
+    logger("eraser");
 }
 
-function addOperation(number1,number2) {
-     return number1 + number2;
+function mathOperationClick(operation){
+    mathOperationClicked = true;
+    currentOperation = operation;
+
+    if(operand1 === null && operand2 === null){
+        operand1 = Number(mainScreen.innerText);
+    }
+    else if (operand1 !== null && operand2 === null){
+        operand2 = Number(mainScreen.innerText);
+        doMathOperation();
+    }
+    logger("mathOperationClick");
 }
 
-function subtractOperation(number1,number2) {
-     return number1 - number2;
+function equalClick()
+{
+    const operand = Number(mainScreen.innerText);
+    if(operand !== NaN) {
+        operand2 = operand;
+        if(operand1 !== null){
+            doMathOperation();
+        }
+        else
+        {
+            operand1 = operand;
+            operand2 = null;
+        }
+        
+    }
+    logger("equalClick");
 }
 
-function multiplyOperation(number1,number2) {
-     return number1 * number2;
+function doMathOperation()
+{
+    let result = 0;
+    if(operand1 !== null && currentOperation !== null && operand2 !== null)
+    {
+        switch (currentOperation){
+            case "add":
+                result = operand1 + operand2;
+                break;
+            case "subtract":
+                result = operand1 - operand2;
+                break;
+            case "multiply":
+                result = operand1 * operand2;
+                break;
+            case "division":
+                result = operand1 / operand2;
+                break;
+        }
+
+        mainScreen.innerText = result;
+        operand1 = null;
+        operand2 = null; 
+    }
+    logger("doMathOperation");
 }
 
-function divisionOperation(number1,number2) {
-     return number1 / number2;
+function resetCalc(){
+    mathOperationClicked = false;
+    currentOperation = null;
+    operand1 = null;
+    operand2 = null;
+    logger("resetCalc");
 }
 
-
+function logger(text) {
+    console.log(text);
+    console.log(`Operand 1 = ${operand1}`);
+    console.log(`Operand 2 = ${operand2}`);
+    console.log(`Current Operation = ${currentOperation}`);
+    console.log(`Math ops Clicked = ${mathOperationClicked}`);
+    console.log("-------------------------------------------------------");
+}
